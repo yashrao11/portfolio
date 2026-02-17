@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Rao | AI/ML Engineer & International Scholar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A365D;
+            --secondary: #0D9488;
+            --accent: #D97706;
+            --dark: #171923;
+            --light: #F7FAFC;
+            --gray: #718096;
+            --card-bg-light: #FFFFFF;
+            --card-bg-dark: #2D3748;
+            --text-light: #2D3748;
+            --text-dark: #F7FAFC;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #63B3ED;
+            --secondary: #68D391;
+            --accent: #F6AD55;
+            --dark: #F7FAFC;
+            --light: #1A202C;
+            --gray: #A0AEC0;
+            --card-bg-light: #2D3748;
+            --card-bg-dark: #2D3748;
+            --text-light: #F7FAFC;
+            --text-dark: #F7FAFC;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navigation */
+        .navbar {
+            position: fixed; top: 0; width: 100%; background: rgba(var(--card-bg-light), 0.95);
+            backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; transition: var(--transition); position: relative; }
+        .nav-links a:hover { color: var(--secondary); }
+        .theme-toggle { background: none; border: 2px solid var(--secondary); color: var(--secondary); padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: 600; transition: var(--transition); }
+        .theme-toggle:hover { background: var(--secondary); color: white; }
+
+        /* Hero Section */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 1rem; }
+        .gradient-text { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .typing-text { font-size: 1.5rem; color: var(--secondary); margin-bottom: 2rem; min-height: 2.5rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 3rem 0; }
+        .stat-card { background: var(--card-bg-light); padding: 1.5rem; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { font-size: 2rem; font-weight: 800; color: var(--primary); display: block; }
+        .cta-buttons { display: flex; gap: 1rem; margin-top: 2rem; }
+        .btn {
+            display: inline-block; padding: 0.8rem 2rem; background: var(--secondary); color: white; border: none; border-radius: 8px;
+            font-weight: 600; cursor: pointer; transition: var(--transition); text-decoration: none;
+        }
+        .btn:hover { background: var(--primary); transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+
+        /* Sections */
+        section { padding: 80px 0; }
+        .section-title {
+            text-align: center; font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; position: relative;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px;
+            background: var(--secondary); border-radius: 2px;
+        }
+
+        /* Experience & Timeline */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: var(--secondary); }
+        .timeline-item { margin: 2rem 0; position: relative; width: 45%; }
+        .timeline-item:nth-child(odd) { left: 0; }
+        .timeline-item:nth-child(even) { left: 55%; }
+        .timeline-content {
+            background: var(--card-bg-light); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Projects Grid */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .project-card {
+            background: var(--card-bg-light); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+            transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15); }
+        .project-img {
+            height: 200px; background: linear-gradient(135deg, var(--secondary), var(--primary)); position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;
+        }
+        .project-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+        .tech-tag { background: rgba(var(--secondary), 0.1); color: var(--secondary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .project-links { margin-top: auto; display: flex; gap: 1rem; }
+
+        /* Skills & Certifications */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .skill-category { background: var(--card-bg-light); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.05); }
+        .skill-item { margin: 1rem 0; }
+        .skill-name { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .skill-bar { height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--secondary); border-radius: 4px; transition: width 1s ease-in-out; }
+        .certifications-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .cert-card { background: var(--card-bg-light); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
+        .cert-card:hover { transform: translateY(-5px); }
+
+        /* Contact */
+        .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .contact-form { background: var(--card-bg-light); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: 'Inter', sans-serif; background: var(--light); color: var(--text-light); transition: var(--transition); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--secondary); }
+        .social-links { display: flex; gap: 1.5rem; margin: 2rem 0; }
+        .social-icon { color: var(--dark); font-size: 1.5rem; transition: var(--transition); }
+        .social-icon:hover { color: var(--secondary); transform: translateY(-3px); }
+
+        /* Footer */
+        footer { background: var(--dark); color: white; padding: 3rem 0; text-align: center; }
+        footer .social-icon { color: white; }
+        footer .social-icon:hover { color: var(--secondary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; left: 0; padding-left: 50px; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate { opacity: 0; }
+        .animate.show { animation: fadeInUp 0.6s ease-out forwards; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">YASH RAO</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i> Theme</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1><span class="gradient-text">Yash Rao</span></h1>
+                <div class="typing-text" id="typingText"></div>
+                <p>Computer Science Engineer | AI/ML Specialist | International Tech Scholar<br>
+                B.Tech CSE @ LPU (CGPA: 9.22) | MPGU Moscow Exchange Scholar | 400+ LeetCode</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="9.22">9.32</span>
+                        CGPA
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="400">400+</span>
+                        LeetCode
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="8">8</span>
+                        Projects
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="20">22</span>
+                        Certifications
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn">View My Work</a>
+                    <a href="https://linkedin.com/in/yashrao11" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/yashrao11" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center;">
+                <div style="background: linear-gradient(135deg, var(--secondary), var(--primary)); height: 300px; border-radius: var(--radius);"></div>
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--primary);">Building Intelligent Systems</h3>
+                    <p style="margin-bottom: 1rem;">A passionate Computer Science Engineer specializing in AI/ML with a strong academic record (CGPA: 9.22) and unique international experience as an Exchange Scholar at Moscow Pedagogical State University (MPGU).</p>
+                    <p style="margin-bottom: 1rem;">Proficient in developing scalable solutions like AI chatbots and predictive models. Recognized for technical contributions to platforms serving 20,000+ users and for academic excellence.</p>
+                    <p>Actively solving complex problems with 400+ LeetCode solutions and continuously expanding expertise through certifications and hands-on projects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Experience -->
+    <section id="experience" style="background: rgba(0,0,0,0.02);">
+        <div class="container">
+            <h2 class="section-title">International Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item animate">
+                    <div class="timeline-content">
+                        <h3>Semester Exchange Scholar</h3>
+                        <p style="color: var(--secondary); font-weight: 600;">Moscow Pedagogical State University (MPGU), Russia</p>
+                        <p style="color: var(--gray);">Aug 2025 - Jan 2026 (6 Months)</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+                            <li>Excelled academically in Advanced Machine Learning, Data Structures & Algorithms.</li>
+                            <li>Contributed to a real-world <strong>Learning Management System (LMS)</strong> used by <strong>20,000+ students</strong>.</li>
+                            <li>Developed an <strong>Intelligent AI Chatbot</strong> for academic queries and platform navigation.</li>
+                            <li>Received a formal appreciation letter for project contributions and performance.</li>
+                            <li>Gained significant experience in a multicultural, collaborative environment.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1: Enlight Russia -->
+                <div class="project-card animate">
+                    <div class="project-img">Enlight Russia - AI LMS</div>
+                    <div class="project-content">
+                        <h3>Enlight Russia - AI LMS</h3>
+                        <p>An AI-enhanced Learning Management System for MPGU, serving 20,000+ students with an intelligent chatbot for academic support, resource recommendation, and navigation.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Frappe</span><span class="tech-tag">APIs</span><span class="tech-tag">Git</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Case Study</a>
+                            <a href="https://github.com/yashrao11" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: AquaVision Pro -->
+                <div class="project-card animate">
+                    <div class="project-img">AquaVision Pro</div>
+                    <div class="project-content">
+                        <h3>AquaVision Pro</h3>
+                        <p>Groundwater Intelligence System using a hybrid XGBoost + LSTM ensemble model, achieving <strong>R² = 0.92</strong> for forecasting. Integrated real-time USGS API with 3M+ historical data points.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span><span class="tech-tag">XGBoost</span><span class="tech-tag">LSTM</span><span class="tech-tag">Streamlit</span><span class="tech-tag">Pandas</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Live Demo</a>
+                            <a href="https://github.com/yashrao11" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: SMS Phishing Attacker -->
+                <div class="project-card animate">
+                    <div class="project-img">SMS Phishing Attacker</div>
+                    <div class="project-content">
+                        <h3>SMS Phishing Attacker</h3>
+                        <p>A cybersecurity tool that automates SMS phishing campaigns by integrating the <strong>Gophish</strong> framework with the <strong>Twilio API</strong>. Features template messaging with variables and debug modes[citation:1].</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span><span class="tech-tag">Gophish</span><span class="tech-tag">Twilio API</span><span class="tech-tag">Cybersecurity</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/yashrao/SMS-Phishing-Attacker" target="_blank" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><i class="fab fa-github"></i> View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Competitive Programming -->
+                <div class="project-card animate">
+                    <div class="project-img">Competitive Programming</div>
+                    <div class="project-content">
+                        <h3>Algorithmic Problem Solving</h3>
+                        <p>Solved <strong>500+ problems</strong> across LeetCode and other platforms. Strengthened advanced DSA concepts, complexity analysis, and writing clean, efficient code.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">C++</span><span class="tech-tag">Algorithms</span><span class="tech-tag">Data Structures</span><span class="tech-tag">Optimization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://leetcode.com/yashrao11 target="_blank" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">LeetCode Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem;">View more projects on <a href="https://github.com/yashrao11" target="_blank" style="color: var(--secondary); font-weight: 600;">GitHub <i class="fas fa-arrow-right"></i></a></p>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" style="background: rgba(0,0,0,0.02);">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category animate">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Languages</h3>
+                    <div class="skill-item"><div class="skill-name"><span>C++</span><span>95%</span></div><div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>Python</span><span>90%</span></div><div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>Java</span><span>85%</span></div><div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>SQL/JavaScript</span><span>85%</span></div><div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div></div>
+                </div>
+                <div class="skill-category animate">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">ML & Data Science</h3>
+                    <div class="skill-item"><div class="skill-name"><span>Pandas/NumPy</span><span>92%</span></div><div class="skill-bar"><div class="skill-progress" style="width:92%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>Scikit-learn</span><span>88%</span></div><div class="skill-bar"><div class="skill-progress" style="width:88%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>TensorFlow/PyTorch</span><span>85%</span></div><div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>XGBoost</span><span>90%</span></div><div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div></div>
+                </div>
+                <div class="skill-category animate">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Tools & Platforms</h3>
+                    <div class="skill-item"><div class="skill-name"><span>Git/GitHub</span><span>95%</span></div><div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>Docker</span><span>80%</span></div><div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>AWS/GCP</span><span>75%</span></div><div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name"><span>Linux/Ubuntu</span><span>85%</span></div><div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications & Courses</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--gray);">A selection from 20+ professional certifications.</p>
+            <div class="certifications-grid">
+                <div class="cert-card animate"><i class="cert-icon fab fa-google" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i><h3>Google IT Support</h3><p>Bits and Bytes of Computer Networking</p><span style="color: var(--gray); font-size: 0.9rem;">Google | Sep 2024</span></div>
+                <div class="cert-card animate"><i class="cert-icon fab fa-ibm" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i><h3>IBM Hardware & OS</h3><p>Introduction to Hardware & Operating Systems (Honors)</p><span style="color: var(--gray); font-size: 0.9rem;">IBM | Sep 2024</span></div>
+                <div class="cert-card animate"><i class="cert-icon fas fa-university" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i><h3>Harvard CS50</h3><p>Introduction to Computer Science</p><span style="color: var(--gray); font-size: 0.9rem;">HarvardX (edX) | Jan 2024</span></div>
+                <div class="cert-card animate"><i class="cert-icon fab fa-udemy" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i><h3>Generative AI Mastery</h3><p>Master Generative AI & Tools (ChatGPT & More)</p><span style="color: var(--gray); font-size: 0.9rem;">Udemy | Aug 2025</span></div>
+                <div class="cert-card animate"><i class="cert-icon fas fa-robot" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i><h3>Machine Learning A-Z</h3><p>Data Science, ML & AI</p><span style="color: var(--gray); font-size: 0.9rem;">Udemy | 2024</span></div>
+                <div class="cert-card animate"><i class="cert-icon fas fa-chart-line" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i><h3>Data Analysis with Python</h3><p>Pandas, NumPy, Data Visualization</p><span style="color: var(--gray); font-size: 0.9rem;">Coursera | 2024</span></div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem;">View all certifications on <a href="https://linkedin.com/in/yashrao11" target="_blank" style="color: var(--secondary); font-weight: 600;">LinkedIn <i class="fas fa-arrow-right"></i></a></p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background: rgba(0,0,0,0.02);">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info animate">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.8rem; color: var(--primary);">Open to Opportunities</h3>
+                    <p style="margin-bottom: 2rem;">I am actively seeking roles in <strong>AI/ML Engineering, Data Science, and Software Development</strong>. Feel free to reach out for collaborations or discussions.</p>
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Connect With Me</h4>
+                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem; color: var(--secondary);"></i>yashraobihali@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem; color: var(--secondary);"></i> Phagwara, Punjab | Moscow, Russia</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/yashrao11" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/yashrao11" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://leetcode.com/yashrao11" target="_blank" class="social-icon"><i class="fas fa-code"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-file-pdf"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form animate">
+                    <form id="contactForm">
+                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
+                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
+                        <div class="form-group"><input type="text" placeholder="Subject" required></div>
+                        <div class="form-group"><textarea rows="5" placeholder="Your Message" required></textarea></div>
+                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="font-size: 2rem; margin-bottom: 1rem; color: white;">YASH RAO</div>
+            <p>Building the future with intelligence, code, and global perspective.</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/yashrao11" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/yashrao11" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-hackerrank"></i></a>
+            </div>
+            <p style="margin-top: 2rem; color: #CBD5E0; font-size: 0.9rem;">
+                &copy; 2026 Yash Rao. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Typing Effect
+        const typingText = document.getElementById('typingText');
+        const texts = ["AI/ML Engineer", "Problem Solver (400+ LeetCode)", "International Scholar", "Full-Stack Developer"];
+        let textIndex = 0, charIndex = 0, isDeleting = false;
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            if (isDeleting) {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(typeWriter, 500);
+            } else {
+                setTimeout(typeWriter, isDeleting ? 50 : 100);
+            }
+        }
+
+        // 2. Animated Counter
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const increment = target / 100;
+            if (count < target) {
+                counter.innerText = (count + increment).toFixed(2);
+                setTimeout(() => animateCounter(counter), 20);
+            } else {
+                counter.innerText = target.toFixed(target % 1 ? 2 : 0);
+            }
+        };
+
+        // 3. Scroll Animation & Trigger Counters
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    if (entry.target.id === 'home') {
+                        document.querySelectorAll('.stat-number').forEach(counter => {
+                            animateCounter(counter);
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+        // 4. Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            themeToggle.innerHTML = `${themeIcon.outerHTML} Theme`;
+            localStorage.setItem('portfolio-theme', newTheme);
+        });
+        const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        themeToggle.innerHTML = `${themeIcon.outerHTML} Theme`;
+
+        // 5. Form Submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
+
+        // 6. Smooth Scroll & Initialize
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', typeWriter);
+    </script>
+</body>
+</html>
